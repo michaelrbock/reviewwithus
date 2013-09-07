@@ -1,6 +1,6 @@
 <?php 
 
-echo readfile("../templates/signup.html");
+readfile("../templates/signup.html");
 require("db.php");
 $db = new DB();
 

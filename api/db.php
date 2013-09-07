@@ -23,7 +23,6 @@ class DB{
                 } 
                 
         }
-	echo " constructed";
     }
 
     function insert_user($email,$password,$username) {
@@ -43,7 +42,8 @@ class DB{
         return $rs;
     }
 
-    function run_select() {
+    function run_select() 
+    {
         $rs = mysql_query("SELECT * FROM users");
         if (!$rs) 
         {
@@ -62,6 +62,17 @@ class DB{
 	{
 		mysql_close();
 	}
+
+	function delete_table() 
+	{
+		$this->run_query("TRUNCATE TABLE users");
+	}
+
+
 }
+
+
+
+
 ?>
 
