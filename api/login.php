@@ -2,19 +2,15 @@
 
 require("db.php");
 $db = new DB();
+//$db->run_select();
 readfile("../templates/login.html");
 
-//if(strlen($_POST['email']) > 0 and strlen($_POST['username']) > 0 and strlen($_POST['password']) > 0) 
 if(isset($_POST['email']) and isset($_POST['password']))
 {
-	echo "loggin in email: ".($_POST['email'])."<br>";
-	//CLEAN!
-<<<<<<< HEAD
-	$query = "SELECT password,email FROM users WHERE email = '".$_POST['email']."' AND password='".$_POST['password']."' LIMIT 1";
-=======
-	$email = mysqli_real_escape_string($this->con, $email);
-	$query = sprintf("SELECT password,email FROM users WHERE email ='%s' LIMIT 1", $email);
->>>>>>> 79323a27e249803321b090743b01297c23b1f60b
+	$email = mysqli_real_escape_string($db->con, $_POST['email']);
+	$password = mysqli_real_escape_string($db->con, $_POST['password']);
+	
+	$query = sprintf("SELECT password,email FROM users WHERE email ='%s' and password='%s' LIMIT 1", $email, $password);
 
 	$result = $db->run_query($query);	
 	echo 'result :'.$result;
@@ -22,10 +18,10 @@ if(isset($_POST['email']) and isset($_POST['password']))
 	if (mysql_fetch_array($result) !== false)
 	{
 		echo "<script>alert('log in baby')</script>";
+		//header('Location: http://google.com');
 	}
 	$db->close();
 
-	header('Location: http://google.com');
 }
 
 
