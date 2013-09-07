@@ -10,6 +10,7 @@ class DB {
         $user = "ubuntu"; 
         $r = mysql_connect($host, $user);
 
+	echo "constructing";
         if (!$r) 
         {
                 echo "Could not connect to server\n";
@@ -25,6 +26,7 @@ class DB {
                 } 
                 
         }
+	echo "consturcted";
     }
 
     function insert_user($email,$password,$username) {
@@ -67,5 +69,6 @@ class DB {
 
 
 }
+$db = new DB();
 ?>
 
