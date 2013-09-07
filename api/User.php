@@ -9,10 +9,12 @@ class User
 
     function __construct($email, $username, $password)
     {
-        if (strpos($email,".edu") == false)  //needs to END with
-        {
-            exit("bad email $email");
-        }
+		$email = rtrim($email);
+		if(strpos($email, strlen($email) - strlen(".edu")) != ".edu")
+		{
+			exit("bad email $email");
+		}
+
         $this->email = $email;
         $this->username = $username;
         $this->password = $password;

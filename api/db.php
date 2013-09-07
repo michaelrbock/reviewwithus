@@ -1,19 +1,19 @@
 <?php 
+class DB{
 
-
-class DB {
-
-    
+    public $con;
 
     function __construct(){
         $host = "localhost"; 
         $user = "ubuntu"; 
-        $r = mysql_connect($host, $user);
-
-	echo "constructing";
-        if (!$r) 
+	//phpinfo();
+	ini_set('display_errors',1);
+	error_reporting(E_ALL);
+        $this->con = mysqli_connect($host, $user);// or die('error '.mysqli_error($r));
+	//if (mysqli_connect_errno($r)) echo "failed" . mysqli_connect_error();	
+        if (!$this->con) 
         {
-                echo "Could not connect to server\n";
+                echo "\nCould not connect to server\n";
                 trigger_error(mysql_error(), E_USER_ERROR);
         } 
         else 
@@ -26,28 +26,17 @@ class DB {
                 } 
                 
         }
-	echo "consturcted";
     }
 
     function insert_user($email,$password,$username) {
         $this->run_query("INSERT INTO users (email,password,username, karma,courses) VALUES ('$email','$password','$username',0,'')");
-
     }
 
 
-    function run_query($query) {
-        $rs = mysql_query($query);
-        if (!$rs) 
-        {
-            echo "Could not execute query: ".$query;
-            trigger_error(mysql_error(), E_USER_ERROR); 
-            return;
-        } 
-        return $rs;
 
-    }
 
-    function run_select() {
+    function run_select() 
+    {
         $rs = mysql_query("SELECT * FROM users");
         if (!$rs) 
         {
@@ -58,7 +47,7 @@ class DB {
 
         while ($row = mysql_fetch_assoc($rs)) 
         {
-                echo $row['id'] . " " . $row['username'] . " " . $row['password'];
+                echo $row['id'] . " email: " . $row['email'] . " pw: " . $row['password'] . '<br>';
         }
 
     }
@@ -67,8 +56,46 @@ class DB {
 		mysql_close();
 	}
 
+	function delete_table() 
+	{
+		$this->run_query("TRUNCATE TABLE users");
+	}
+
+        function run_query($query) {
+		$rs = mysql_query($query);
+		if (!$rs) 
+		{
+		    echo "Could not execute query: ".$query;
+		    trigger_error(mysql_error(), E_USER_ERROR); 
+		    return;
+		} 
+		return $rs;
+	    }
+
+	function check_duplicate_email($email){
+		$email = mysqli_real_escape_string($this->con, $email);
+		$query = sprintf("SELECT email FROM users WHERE email='%s' LIMIT 1",$email);		
+		$rs = $this->run_query($query);
+
+		if(!$rs)
+		{
+			echo "Could not execute query: ".$query;
+			trigger_error(mysql_error(), E_USER_ERROR);
+			return false;
+		}
+
+		if (mysql_fetch_array($rs) !== false) { //duplicate
+			return true;
+		} else {
+		return false;
+		}
+	}	
+	
+
 
 }
-$db = new DB();
+
+
+
 ?>
 
