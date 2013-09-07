@@ -12,6 +12,9 @@
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
     <!-- Overall custome styles -->
     <link href="../assets/custom/custom.css" rel="stylesheet">
 
@@ -32,31 +35,10 @@
 
   <body>
 
-    <!-- For when logged in -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">CheetSheet</a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <form class="navbar-form navbar-left" role="search"> 
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-          </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li><button type="button" class="btn btn-danger navbar-btn">Post</button></li>
-            <li class="inactive"><a href="#">Logout</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <div id="navbar-include"></div>
+    <script type="text/javascript">
+      $("#navbar-include").load("./navbar-loggedout.html");
+    </script>
 
     <div class="container">
 

@@ -12,6 +12,9 @@
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
     <!-- Overall custome styles -->
     <link href="../assets/custom/custom.css" rel="stylesheet">
 
@@ -55,7 +58,7 @@
             </div>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li><button type="button" class="btn btn-danger navbar-btn visible-md visible-lg" data-toggle="modal" href="#newPost">Post</button></li>
+            <li><button type="button" class="btn btn-danger navbar-btn" data-toggle="modal" href="#newPost">Post</button></li>
             <li><a href="#">Logout</a></li>
           </ul>
         </div>
@@ -227,7 +230,7 @@
     </div>
 
 
-    
+
     <!-- New Post -->
     <div class="modal fade" id="newPost" tabindex="-1" role="dialog" aria-labelledby="newPostLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -246,15 +249,39 @@
           <div class="col-xs-3 col-md-6">
             <button type="button" class="btn btn-danger">Post</button>
           </div>
+          <br>
           <div class="col-md-12">
             <ul class="pagination">
-              <li><a href="#"><i class="icon-font"></i> Text</a></li>
-              <li class="active"><a href="#"><i class="icon-picture"></i> Images</a></li>
-              <li><a href="#"> <i class="icon-pencil"></i> Doodles</a></li>
-              <li><a href="#"><i class="icon-beaker"></i> Formulas</a></li>
+              <li class="active" ><a href="#Text" data-toggle="tab"><i class="icon-font"></i> Text</a></li>
+              <li><a href="#Images" data-toggle="tab"><i class="icon-picture"></i> Images</a></li>
+              <li><a href="#Doodles" class="visible-md visible-lg"  data-toggle="tab"> <i class="icon-pencil"></i> Doodles</a></li>
+              <li><a href="#Formulas" class="visible-md visible-lg" data-toggle="tab"><i class="icon-beaker"></i> Formulas</a></li>
             </ul>
-          </div>
-        
+            <br>
+             <div class="tab-content">
+              <div class="tab-pane active" id="Text">
+                <textarea class="form-control" rows="3" style="max-width:100%;"></textarea>
+              </div>
+              <div class="tab-pane" id="Images">
+                <%= form_for @user do |f| %>
+                  <div>
+                    <%= f.label :filepicker_url, "Upload Your Avatar:" %>
+                    <%= f.filepicker_field :filepicker_url %> <!-- User#filepicker_url is a regular string column -->
+                  </div>
+
+                  <%= f.submit %>
+                <% end %>
+              </div>
+              <div class="tab-pane" id="Doodles">
+                test Doodles
+              </div>
+              <div class="tab-pane" id="Formulas">
+                test Formulas
+              </div>
+             </div>
+           </div>
+           <br>
+           <br>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
