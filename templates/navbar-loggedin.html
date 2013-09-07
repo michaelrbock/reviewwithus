@@ -31,6 +31,10 @@
 
     $("#tags").autocomplete({ source: array });
   };
+
+  $(document).ready( function() {
+    setUp();
+  });
 </script>
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -49,8 +53,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Choose School <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a class="school" href="#">USC</a></li>
             <li><a class="school" href="#">UPenn</a></li>
+            <li><a class="school" href="#">USC</a></li>
             <li><a class="school" href="#">WashU JK</a></li>
           </ul>
         </li>
@@ -63,10 +67,11 @@
           });
         </script>
       </ul>
-      <form class="navbar-form navbar-left" role="search"> 
+      <form class="navbar-form navbar-left" role="search" method="post" action="FILL_IN"> 
         <div class="form-group ui-widget">
           <input id="tags" type="text" class="form-control" placeholder="Search">
         </div>
+        <button type="submit" class="btn btn-default">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-danger navbar-btn">Post</button></li>
