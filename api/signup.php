@@ -9,15 +9,20 @@ if(isset($_POST['email']) and isset($_POST['username']) and isset($_POST['passwo
 {
 
 
-	if ( $db->check_duplicate_email($_POST['email'] ))   {
-		echo "DUPLICATE!";
+	if ( $db->check_duplicate($_POST['email'],'email' ) or $db->check_duplicate($_POST['username'],'username' )  )   
+	{
+		echo "<script>alert('Our records show your email/username exists in our database.')</script>";
 		return;
+	}
 
-		}
+	
+
 	$db->insert_user($_POST['email'],$_POST['password'],$_POST['username']);
 	$db->run_select();
 	$db->close();
-	header( 'Site' ) ;
+
+	header( 'Location: http://ite.com' ) ;
+
 
 
 
