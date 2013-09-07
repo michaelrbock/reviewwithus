@@ -47,7 +47,11 @@
 }
 
 
-
+.sketchpad {
+	text-align:center;
+	border: 1px solid #dddddd;
+	
+}
 
 
 /*Custom CSS Panel*/

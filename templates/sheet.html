@@ -25,6 +25,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/sketch.min.js"></script>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -34,9 +36,9 @@
 
 
     <!-- MathJax -->
-    <script type="text/javascript"
-   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript"
+   // src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+
   </head>
 
   <body>
@@ -64,11 +66,7 @@
         </div>
       </div>
     </nav>
-    <br><br><br><br>
-
-
-
-
+    <br><br><br><br><br><br><br><br>
 
     <div class="container">
       <div class="row">
@@ -240,27 +238,39 @@
             <h4 class="modal-title">New Post</h4>
           </div>
           <br>
-          <div class="col-xs-9 col-md-6">
-            <div class="input-group">
-              <span class="input-group-addon">Title</span>
-              <input type="text" class="form-control" placeholder="Formula, Image Etc.">
+          <row>
+            <div class="col-xs-9 col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Title</span>
+                <input type="text" class="form-control" placeholder="Formula, Image Etc.">
+              </div>
             </div>
-          </div>
-          <div class="col-xs-3 col-md-6">
-            <button type="button" class="btn btn-danger">Post</button>
-          </div>
+            <div class="col-xs-3 col-md-6">
+              
+            </div>
+        </row>
           <br>
+          <row>
           <div class="col-md-12">
             <ul class="pagination">
               <li class="active" ><a href="#Text" data-toggle="tab"><i class="icon-font"></i> Text</a></li>
               <li><a href="#Images" data-toggle="tab"><i class="icon-picture"></i> Images</a></li>
-              <li><a href="#Doodles" class="visible-md visible-lg"  data-toggle="tab"> <i class="icon-pencil"></i> Doodles</a></li>
+              <li><a href="#doodles-tab"  id="doodles" data-toggle="tab"> <i class="icon-pencil"></i> Doodles</a></li>
+              <script type="text/javascript">
+                $('#doodles').bind('click', function () {
+                  $(function() {
+                    $('#simple_sketch').sketch();
+                  });
+                });
+              </script>
               <li><a href="#Formulas" class="visible-md visible-lg" data-toggle="tab"><i class="icon-beaker"></i> Formulas</a></li>
             </ul>
             <br>
              <div class="tab-content">
               <div class="tab-pane active" id="Text">
-                <textarea class="form-control" rows="3" style="max-width:100%;"></textarea>
+                <textarea class="form-control" rows="5" style="max-width:100%;"></textarea>
+                <br>    
+                <button type="button" class="btn btn-danger">Post</button>
               </div>
               <div class="tab-pane" id="Images">
                 <%= form_for @user do |f| %>
@@ -268,20 +278,32 @@
                     <%= f.label :filepicker_url, "Upload Your Avatar:" %>
                     <%= f.filepicker_field :filepicker_url %> <!-- User#filepicker_url is a regular string column -->
                   </div>
-
                   <%= f.submit %>
                 <% end %>
               </div>
-              <div class="tab-pane" id="Doodles">
-                test Doodles
+              <div class="tab-pane" id="doodles-tab">                
+                <div class="sketchpad">
+                  <div class="tools">
+                    <canvas id="simple_sketch" width="700" height="300"></canvas>
+
+                  </div>
+
+                </div>
+                <br>
+                      <a href="#simple_sketch" data-download="png" style="float: left; width: 100px;"><button type="button" class="btn btn-danger">Post</button></a>
+                      <br><br>
               </div>
+              
+
               <div class="tab-pane" id="Formulas">
                 test Formulas
               </div>
              </div>
            </div>
-           <br>
-           <br>
+         </row>
+         <br>
+
+
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
