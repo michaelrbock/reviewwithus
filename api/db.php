@@ -62,6 +62,7 @@ class DB{
 	}
 
         function run_query($query) {
+		echo $query;
 		$rs = mysql_query($query);
 		if (!$rs) 
 		{
@@ -72,9 +73,9 @@ class DB{
 		return $rs;
 	    }
 
-	function check_duplicate_email($email){
-		$email = mysqli_real_escape_string($this->con, $email);
-		$query = sprintf("SELECT email FROM users WHERE email='%s' LIMIT 1",$email);		
+	function check_duplicate($value,$field ){
+		$value = mysqli_real_escape_string($this->con, $value);
+		$query = sprintf("SELECT %s FROM users WHERE %s='%s' LIMIT 1",$field,$field,$value);		
 		$rs = $this->run_query($query);
 
 		if(!$rs)
@@ -96,6 +97,9 @@ class DB{
 }
 
 
+
+
+$db = new DB();
 
 ?>
 
