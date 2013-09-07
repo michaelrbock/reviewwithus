@@ -1,14 +1,17 @@
 <?php 
 class DB{
+
+    public $con;
+
     function __construct(){
         $host = "localhost"; 
         $user = "ubuntu"; 
 	//phpinfo();
-	//ini_set('display_errors',1);
-	//error_reporting(E_ALL);
-        $r = mysql_connect($host, $user);// or die('error '.mysqli_error($r));
+	ini_set('display_errors',1);
+	error_reporting(E_ALL);
+        $this->con = mysqli_connect($host, $user);// or die('error '.mysqli_error($r));
 	//if (mysqli_connect_errno($r)) echo "failed" . mysqli_connect_error();	
-        if (!$r) 
+        if (!$this->con) 
         {
                 echo "\nCould not connect to server\n";
                 trigger_error(mysql_error(), E_USER_ERROR);
@@ -31,16 +34,6 @@ class DB{
 
 
 
-    function run_query($query) {
-        $rs = mysql_query($query);
-        if (!$rs) 
-        {
-            echo "Could not execute query: ".$query;
-            trigger_error(mysql_error(), E_USER_ERROR); 
-            return;
-        } 
-        return $rs;
-    }
 
     function run_select() 
     {
@@ -68,9 +61,45 @@ class DB{
 		$this->run_query("TRUNCATE TABLE users");
 	}
 
+        function run_query($query) {
+		echo $query.'\n\n';
+		$rs = mysql_query($query);
+		if (!$rs) 
+		{
+		    echo "Could not execute query: ".$query;
+		    trigger_error(mysql_error(), E_USER_ERROR); 
+		    return;
+		} 
+		return $rs;
+	    }
+
+	function check_duplicate_email($email){
+		$email = mysqli_real_escape_string($this->con, $email);
+		$query = sprintf("SELECT email FROM users WHERE email='%s' LIMIT 1",$email);		
+		$rs = $this->run_query($query);
+
+		if(!$rs)
+		{
+			echo "Could not execute query: ".$query;
+			trigger_error(mysql_error(), E_USER_ERROR);
+			return false;
+		}
+
+		if (mysql_fetch_array($rs) !== false) { //duplicate
+			echo "duplicate";
+			return true;
+		} else {
+		echo "not dup";
+		return false;
+		}
+	}	
+	
+
 
 }
-
+$db = new DB();
+$email = 'iacobroy@gmail.ed2u';
+echo $db->check_duplicate_email($email);
 
 
 
