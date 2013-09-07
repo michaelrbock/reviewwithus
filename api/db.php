@@ -62,7 +62,6 @@ class DB{
 	}
 
         function run_query($query) {
-		echo $query.'\n\n';
 		$rs = mysql_query($query);
 		if (!$rs) 
 		{
@@ -86,10 +85,8 @@ class DB{
 		}
 
 		if (mysql_fetch_array($rs) !== false) { //duplicate
-			echo "duplicate";
 			return true;
 		} else {
-		echo "not dup";
 		return false;
 		}
 	}	
@@ -97,9 +94,6 @@ class DB{
 
 
 }
-$db = new DB();
-$email = 'iacobroy@gmail.ed2u';
-echo $db->check_duplicate_email($email);
 
 
 
