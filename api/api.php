@@ -24,7 +24,7 @@ class User
 }
 
 
-echo readfile("/home/ubuntu/CheetSheet/templates/signup.html");
+echo readfile("../templates/signup.html");
 echo "<br><br>";
 
 $user = new User("my_email.edu","name","","","");
