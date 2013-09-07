@@ -3,8 +3,12 @@
 echo "<br><br>";
 echo readfile("../templates/signup.html");
 
-if(strlen($_POST['email']) > 0 and strlen($_POST['username']) > 0 and strlen($_POST['password']) > 0) 
+
+
+//if(strlen($_POST['email']) > 0 and strlen($_POST['username']) > 0 and strlen($_POST['password']) > 0) 
+if(isset($_POST['email']) > 0 and isset($_POST['username']) > 0 and isset($_POST['password']) > 0)
 {
+    echo "email: ".($_POST['email']);
     echo "why2";
     $host = "localhost"; 
     $user = "ubuntu"; 
