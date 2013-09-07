@@ -94,7 +94,8 @@ class DB{
 
 
 }
-
+$db = new DB();
+$db->clear
 
 
 ?>
