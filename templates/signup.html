@@ -72,14 +72,17 @@
 
     <script>
       $(document).ready(function() {
-        $("#register").submit( function() {
+        $("#register").submit( function(e) {
+          // Prevent submit until validation
+          e.preventDefault();
           var email = $("#email").val();
           var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+edu+$/;
           if (regex.test(email)) {
-            alert("true!");
+            // Now submit form
+            $("#register").unbind('submit').submit();
           }
           else {
-            alert("false!");
+            alert("Please use a .edu email address to register!");
           }
         });
       });
