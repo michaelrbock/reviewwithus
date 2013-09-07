@@ -28,15 +28,23 @@
   </head>
 
   <body>
+
     <div id="navbar-include">
     </div>
     <div id="navbar-include"></div>
     <script type="text/javascript">
       $("#navbar-include").load("./navbar-loggedout.html");
     </script>
+    <br>
 
+<br>
+  <br>
+<br>
+  <br>
     <div class="container">
-
+      
+         <div class="panel panel-custom">
+              <div class="panel-body">
       <form class="form-signin" method="post" action="../api/login.php">
         <h2 class="form-signin-heading">Please sign in</h2>
         <input name="email" type="text" class="form-control" placeholder="Email address" autofocus>
@@ -46,8 +54,10 @@
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
-
+ </div> 
+  </div> 
     </div> <!-- /container -->
+
 
   </body>
 </html>

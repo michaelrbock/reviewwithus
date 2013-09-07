@@ -41,6 +41,9 @@
 
   </head>
 
+
+
+
   <body>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -243,6 +246,17 @@
           <row>
             <div class="col-xs-9 col-md-6">
               <div class="input-group">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Action <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Class 1</a></li>
+                    <li><a href="#">Class 2</a></li>
+                    <li><a href="#">Class 3</a></li>
+                    <li><a href="#">Class 4</a></li>
+                  </ul>
+                </div>
                 <span class="input-group-addon">Title</span>
                 <input type="text" class="form-control" placeholder="Formula, Image Etc.">
               </div>
@@ -295,7 +309,7 @@
               <div class="tab-pane" id="Formulas">
                 <textarea class="form-control" rows="2" style="max-width:100%;"></textarea>
                 <br>    
-                <button type="button" class="btn btn-danger">Preview</button>
+                <button id="wolfram" type="button" class="btn btn-danger">Preview</button>
                 <br>   
                 <br>    
                  <div class="sketchpad">
@@ -303,6 +317,26 @@
                  </div>
                  <br>   
               <button type="button" class="btn btn-danger">Post</button>
+               <script type="text/javascript">
+                $('#wolfram').bind('click', function () {
+                  $.ajax({
+                    url: "api.wolframalpha.com/v2/query",
+                    data: {input:'pi', appid:'5H2U52-664GL8PU39'},
+         
+                    success:function(data){
+                      // successful request; do something with the data
+                      $('#ajax-panel').empty();
+                      $(data).find('item').each(function(i){
+                        $('#ajax-panel').append('<h4>' + $(this).find('title').text() + '</h4><p>' + $(this).find('link').text() + '</p>');
+                      });
+                    },
+                    error:function(){
+                      // failed request; give feedback to user
+                      $('#ajax-panel').html('<p class="error"><strong>Oops!</strong> Try that again in a few moments.</p>');
+                    }
+                  });
+
+              </script>
               </div>
              </div>
            </div>
@@ -311,7 +345,13 @@
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
-
+ <script type="text/javascript">
+                $('#doodles').bind('click', function () {
+                  $(function() {
+                    $('#simple_sketch').sketch();
+                  });
+                });
+              </script>
         </div>
       </div>
     </div>

@@ -4,6 +4,19 @@ body {
   background-color: #eee;
 }
 
+html, body {
+  background: url(http://i.imgur.com/VsfvqbD.jpg) no-repeat;
+  max-width: 100%;
+  background-height: 100%;
+  background-size: 100%;
+
+}
+
+
+
+.container {
+  text-align: center;
+}
 .form-signin {
   max-width: 330px;
   padding: 15px;
