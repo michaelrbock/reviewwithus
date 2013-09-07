@@ -1,5 +1,4 @@
 <?php 
-
 readfile("../templates/signup.html");
 require("db.php");
 $db = new DB();
@@ -16,20 +15,12 @@ if(isset($_POST['email']) and isset($_POST['username']) and isset($_POST['passwo
 	$db->insert_user($_POST['email'],$_POST['password'],$_POST['username']);
 	$db->run_select();
 	$db->close();
-
 	header( 'Location: http://ite.com' ) ;
-
-
-
-
 }
-
 
 else 
 {
 	echo "not logged in";
 }
-
-
 
 ?>

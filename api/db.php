@@ -69,11 +69,11 @@ class DB{
 		return $rs;
 	    }
 
-	function check_duplicate($value,$field ){
+	function check_duplicate($value,$field )
+	{
 		$value = mysqli_real_escape_string($this->con, $value);
 		$query = sprintf("SELECT %s FROM users WHERE %s='%s' LIMIT 1",$field,$field,$value);		
 		$rs = $this->run_query($query);
-
 		if(!$rs)
 		{
 			echo "Could not execute query: ".$query;
@@ -81,21 +81,15 @@ class DB{
 			return false;
 		}
 
-		if (mysql_fetch_array($rs) !== false) { //duplicate
+		if (mysql_fetch_array($rs) !== false) 
+		{ 
 			return true;
-		} else {
+		} 
+		else 
+		{
 		return false;
 		}
 	}	
-
-
-
 	}
-
-
-
-
-	$db = new DB();
-
 	?>
 
