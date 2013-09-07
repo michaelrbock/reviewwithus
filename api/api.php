@@ -1,38 +1,49 @@
 <?php 
 
-class User 
-{
-	public $email;
-	public $username;
-	public $password; //SALT ME
-	public $karma;
-	public $courses;
-
-	function __construct($email, $username, $password, $karma, $courses) 
-	{
-		if (strpos($email,".edu") == false)  //needs to END with
-		{
-			exit("bad email $email");
-		} 
-		$this->email = $email;
-		$this->username = $username;
-		$this->password = $password;
-		$this->karma = $karma;
-		$this->courses = $courses;
-		echo "success";
-	}
-}
-
-
-echo readfile("../templates/signup.html");
 echo "<br><br>";
+echo readfile("../templates/signup.html");
 
-//$user = new User("my_email.edu","name","","","");
-if(isset($_POST['email']))  
+if(strlen($_POST['email']) > 0 and strlen($_POST['username']) > 0 and strlen($_POST['password']) > 0) 
 {
-    echo $_POST['email'];
-    echo 'WHAT';
-}else 
+    echo "why2";
+    $host = "localhost"; 
+    $user = "ubuntu"; 
+    $r = mysql_connect($host, $user );
+
+    if (!$r) {
+            echo "Could not connect to server\n";
+            trigger_error(mysql_error(), E_USER_ERROR);
+    } else {
+            echo "Connection established\n"; 
+            $r2 = mysql_select_db("test");
+
+            if (!$r2) {
+                    echo "Cannot select database\n";
+                        trigger_error(mysql_error(), E_USER_ERROR); 
+            } else {
+                    echo "Database selected\n";
+            }
+
+
+            $rs = mysql_query("SELECT * FROM users");
+            if (!$rs) {
+                    echo "Could not execute query: $query";
+                        trigger_error(mysql_error(), E_USER_ERROR); 
+            } else {
+                    echo "Query: query executed\n";
+            } 
+
+            while ($row = mysql_fetch_assoc($rs)) {
+                    echo $row['id'] . " " . $row['username'] . " " . $row['password'] . "\n";
+            }
+
+            mysql_close();
+    }
+
+
+
+}
+else 
 {
 	echo "nope2";
 }
