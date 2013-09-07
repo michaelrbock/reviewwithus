@@ -9,7 +9,12 @@ if(isset($_POST['email']) and isset($_POST['password']))
 {
 	echo "loggin in email: ".($_POST['email'])."<br>";
 	//CLEAN!
+<<<<<<< HEAD
 	$query = "SELECT password,email FROM users WHERE email = '".$_POST['email']."' AND password='".$_POST['password']."' LIMIT 1";
+=======
+	$email = mysqli_real_escape_string($this->con, $email);
+	$query = sprintf("SELECT password,email FROM users WHERE email ='%s' LIMIT 1", $email);
+>>>>>>> 79323a27e249803321b090743b01297c23b1f60b
 
 	$result = $db->run_query($query);	
 	echo 'result :'.$result;
