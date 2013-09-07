@@ -27,8 +27,14 @@ class User
 echo readfile("/home/ubuntu/CheetSheet/templates/signup.html");
 echo "<br><br>";
 
-$user = new User("my_email.edu","name","","","");
-
+//$user = new User("my_email.edu","name","","","");
+if(isset($_GET['email']))  
+{
+    echo $_GET['email'];
+}else 
+{
+	echo "nope";
+}
 
 
 
