@@ -28,12 +28,13 @@ echo readfile("../templates/signup.html");
 echo "<br><br>";
 
 //$user = new User("my_email.edu","name","","","");
-if(isset($_GET['email']))  
+if(isset($_POST['email']))  
 {
-    echo $_GET['email'];
+    echo $_POST['email'];
+    echo 'WHAT';
 }else 
 {
-	echo "nope";
+	echo "nope2";
 }
 
 
