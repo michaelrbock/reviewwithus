@@ -3,7 +3,11 @@
 echo readfile("../templates/signup.html");
 include "db.php";
 
+echo "trying....2";
 $db = new DB();
+
+echo "trying....";
+
 //if(strlen($_POST['email']) > 0 and strlen($_POST['username']) > 0 and strlen($_POST['password']) > 0) 
 if(isset($_POST['email']) and isset($_POST['username']) and isset($_POST['password']))
 {
