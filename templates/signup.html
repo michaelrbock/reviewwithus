@@ -59,9 +59,9 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" id="register">
         <h2 class="form-signin-heading">Please sign up</h2>
-        <input type="text" class="form-control" placeholder="Email address (.edu only)" autofocus>
+        <input type="text" class="form-control" id="email" placeholder="Email address (.edu only)" autofocus>
         <input type="text" class="form-control" placeholder="Username">
         <input type="password" class="form-control" placeholder="Password">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
@@ -71,7 +71,16 @@
 
     <script>
       $(document).ready(function() {
-        alert("true");
+        $("#register").submit( function() {
+          var email = $("#email").val();
+          var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+edu+$/;
+          if (regex.test(email)) {
+            alert("true!");
+          }
+          else {
+            alert("false!");
+          }
+        });
       });
     </script>
 
