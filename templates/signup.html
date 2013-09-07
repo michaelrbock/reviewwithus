@@ -27,16 +27,39 @@
 
   <body>
 
+     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">CheetSheet</a>
+  </div>
+
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+   
+    <ul class="nav navbar-nav navbar-right">
+       <li><button type="button" class="btn btn-danger navbar-btn">Login</button></li>
+
+      
+    </ul>
+    </div>
+  </div>
+</nav>
+
+
+
     <div class="container">
 
       <form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="form-control" placeholder="Email address" autofocus>
+        <h2 class="form-signin-heading">Please sign up</h2>
+        <input type="text" class="form-control" placeholder="Email address (.edu only)" autofocus>
+        <input type="text" class="form-control" placeholder="Username">
         <input type="password" class="form-control" placeholder="Password">
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       </form>
 
     </div> <!-- /container -->
