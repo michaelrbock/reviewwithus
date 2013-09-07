@@ -33,11 +33,28 @@
       <script src="../assets/js/html5shiv.js"></script>
       <script src="../assets/js/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" type="text/css"
+  href="http://latex.codecogs.com/css/equation-embed.css" />
+<!--[if lte IE 7]>
+<link rel="stylesheet" href="http://latex.codecogs.com/css/ie6.css" type="text/css"/>
+<![endif]-->
+<script type="text/javascript" 
+  src="http://latex.codecogs.com/js/eq_config.js" ></script>
+<script type="text/javascript" 
+  src="http://latex.codecogs.com/js/eq_editor-lite-17.js" ></script>
   </head>
 
   <body>
 
+<div id="toolbar"></div>
+<textarea id="latexInput" rows="3" cols="40"></textarea>
+<img id="equation" align="middle" />
 
+<script type="text/javascript">
+  EqEditor.embed(toolbar);
+  EqEditor.add(new EqTextArea('equation', 'latexInput'),false);
+</script>
 
     <div class="container">
       
