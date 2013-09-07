@@ -1,0 +1,10 @@
+.navbar {
+	background-color: #fff;
+    -webkit-box-shadow: 0 2px 1px rgba(0, 0, 0, .3);
+          box-shadow: 0 2px 1px rgba(0, 0, 0, .3);
+
+}
+
+html, body {
+	background-color: #e7e7e7;
+}
