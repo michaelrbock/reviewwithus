@@ -7,25 +7,32 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../assets/ico/favicon.png">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Signin</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
 
-    <!-- Overall custome styles -->
+    <!-- Font Awesome -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Overall custom styles -->
     <link href="../assets/custom/custom.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../assets/custom/signin.css" rel="stylesheet">
+    <link href="../assets/custom/CHANGE_ME.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-      <script src="../assets/js/respond.min.js"></script>
-    <![endif]-->
+    <!-- Bootstrap core and JQuery/JQueryUI JavaScript includes -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
   </head>
 
   <body>
+
+    <div id="navbar-include"></div>
+    <script type="text/javascript">
+      $("#navbar-include").load("./navbar-loggedout.html");
+    </script>
 
     <div class="container">
 
