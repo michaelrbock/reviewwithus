@@ -1,56 +1,52 @@
 <?php 
 class DB{
+	public $con;
 
-    public $con;
+	function __construct(){
+		$host = "localhost"; 
+		$user = "ubuntu"; 
+		//phpinfo();
+		ini_set('display_errors',1);
+		error_reporting(E_ALL);
+		$this->con = mysqli_connect($host, $user);// or die('error '.mysqli_error($r));
+		//if (mysqli_connect_errno($r)) echo "failed" . mysqli_connect_error();	
+		if (!$this->con) 
+		{
+			echo "\nCould not connect to server\n";
+			trigger_error(mysql_error(), E_USER_ERROR);
+		} 
+		else 
+		{
+			$r2 = mysql_select_db("test");
+			if (!$r2) 
+			{
+				echo "Cannot select database\n";
+				trigger_error(mysql_error(), E_USER_ERROR); 
+			} 
+		}
+	}
 
-    function __construct(){
-        $host = "localhost"; 
-        $user = "ubuntu"; 
-	//phpinfo();
-	ini_set('display_errors',1);
-	error_reporting(E_ALL);
-        $this->con = mysqli_connect($host, $user);// or die('error '.mysqli_error($r));
-	//if (mysqli_connect_errno($r)) echo "failed" . mysqli_connect_error();	
-        if (!$this->con) 
-        {
-                echo "\nCould not connect to server\n";
-                trigger_error(mysql_error(), E_USER_ERROR);
-        } 
-        else 
-        {
-                $r2 = mysql_select_db("test");
-                if (!$r2) 
-                {
-                        echo "Cannot select database\n";
-                        trigger_error(mysql_error(), E_USER_ERROR); 
-                } 
-                
-        }
-    }
+	function insert_user($email,$password,$username) 
+	{
+		$this->run_query("INSERT INTO users (email,password,username, karma,courses) VALUES ('$email','$password','$username',0,'')");
+	}
 
-    function insert_user($email,$password,$username) {
-        $this->run_query("INSERT INTO users (email,password,username, karma,courses) VALUES ('$email','$password','$username',0,'')");
-    }
+	function run_select() 
+	{
+		$rs = mysql_query("SELECT * FROM users");
+		if (!$rs) 
+		{
+		    echo "Could not execute query: $query";
+		    trigger_error(mysql_error(), E_USER_ERROR); 
+		    return;
+		} 
 
+	while ($row = mysql_fetch_assoc($rs)) 
+	{
+		echo $row['id'] . " email: " . $row['email'] . " pw: " . $row['password'] . '<br>';
+	}
 
-
-
-    function run_select() 
-    {
-        $rs = mysql_query("SELECT * FROM users");
-        if (!$rs) 
-        {
-            echo "Could not execute query: $query";
-            trigger_error(mysql_error(), E_USER_ERROR); 
-            return;
-        } 
-
-        while ($row = mysql_fetch_assoc($rs)) 
-        {
-                echo $row['id'] . " email: " . $row['email'] . " pw: " . $row['password'] . '<br>';
-        }
-
-    }
+	}
 	function close() 
 	{
 		mysql_close();
@@ -61,7 +57,7 @@ class DB{
 		$this->run_query("TRUNCATE TABLE users");
 	}
 
-        function run_query($query) {
+	function run_query($query) {
 		echo $query;
 		$rs = mysql_query($query);
 		if (!$rs) 
@@ -91,15 +87,15 @@ class DB{
 		return false;
 		}
 	}	
-	
-
-
-}
 
 
 
+	}
 
-$db = new DB();
 
-?>
+
+
+	$db = new DB();
+
+	?>
 
