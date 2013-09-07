@@ -70,22 +70,29 @@
 
     <div class="container">
       <div class="row">
-       <div class="col-md-4 col-sm-6">
+       <div class="col-md-4 col-sm-6" id="badcontent">
             <div class="panel panel-custom">
               <div class="panel-body">
                 <div class="image-post">
                   <img class="img-responsive" src="http://placehold.it/900x700">
                 </div>
               </div>
-              <div class="panel-footer">
+              <div class="panel-footer" >
                 <div class="row">
                   <div class="col-xs-10 col-md-10">
                     <h4>This is what it looks like when a user posts an image</h4>
                   </div>
                   <div class="col-xs-2 col-md-2">
                     <div class="arrows">
-                      <h4><a class="arrows-up" href="#"><span class="glyphicon glyphicon-chevron-up"></span></a></h4>
-                      <h4><a class="arrows-down" href="#"><span class="glyphicon glyphicon-chevron-down"></span></a></h4>
+                      <h4><a class="arrows-up" href="#" ><span class="glyphicon glyphicon-chevron-up"></span></a></h4>
+                      <h4><a class="arrows-down" href="#" id="downvote"><span class="glyphicon glyphicon-chevron-down"></span></a></h4>
+                      <script type="text/javascript">
+                $('#downvote').bind('click', function () {
+                  $(function() {
+                    $('#badcontent').hide();
+                  });
+                });
+              </script>
                     </div>
                   </div>
                 </div>
@@ -223,6 +230,87 @@
                 </div>
               </div>
           </div>
+          
+    <div class="modal fade" id="newPost" tabindex="-1" role="dialog" aria-labelledby="newPostLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">New Post</h4>
+          </div>
+          <br>
+          <row>
+            <div class="col-xs-9 col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Title</span>
+                <input type="text" class="form-control" placeholder="Formula, Image Etc.">
+              </div>
+            </div>
+            <div class="col-xs-3 col-md-6">
+            </div>
+        </row>
+          <br>
+          <row>
+          <div class="col-md-12">
+            <ul class="pagination">
+              <li class="active" ><a href="#Text" data-toggle="tab"><i class="icon-font"></i> Text</a></li>
+              <li><a href="#Images" data-toggle="tab"><i class="icon-picture"></i> Images</a></li>
+              <li><a href="#doodles-tab" class="visible-md visible-lg" id="doodles" data-toggle="tab"> <i class="icon-pencil"></i> Doodles</a></li>
+              <script type="text/javascript">
+                $('#doodles').bind('click', function () {
+                  $(function() {
+                    $('#simple_sketch').sketch();
+                  });
+                });
+              </script>
+              <li><a href="#Formulas" class="visible-md visible-lg" data-toggle="tab"><i class="icon-beaker"></i> Formulas</a></li>
+            </ul>
+            <br>
+             <div class="tab-content">
+              <div class="tab-pane active" id="Text">
+                <textarea class="form-control" rows="5" style="max-width:100%;"></textarea>
+                <br>    
+                <button type="button" class="btn btn-danger">Post</button>
+              </div>
+              <div class="tab-pane" id="Images">
+                <%= form_for @user do |f| %>
+                  <div>
+                    <%= f.label :filepicker_url, "Upload Your Avatar:" %>
+                    <%= f.filepicker_field :filepicker_url %> <!-- User#filepicker_url is a regular string column -->
+                  </div>
+                  <%= f.submit %>
+                <% end %>
+              </div>
+              <div class="tab-pane" id="doodles-tab">                
+                <div class="sketchpad">
+                  <div class="tools">
+                    <canvas id="simple_sketch" width="700" height="500"></canvas>
+                  </div>
+                </div>
+                <br>
+                      <a href="#simple_sketch" data-download="png" style="float: left; width: 100px;"><button type="button" class="btn btn-danger">Post</button></a>
+                      <br><br>
+              </div>
+              <div class="tab-pane" id="Formulas">
+                <textarea class="form-control" rows="2" style="max-width:100%;"></textarea>
+                <br>    
+                <button type="button" class="btn btn-danger">Preview</button>
+                <br>   
+                <br>    
+                 <div class="sketchpad">
+                  go
+                 </div>
+                 <br>   
+              <button type="button" class="btn btn-danger">Post</button>
+              </div>
+             </div>
+           </div>
+         </row>
+         <br>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
         </div>
       </div>
     </div>
