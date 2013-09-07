@@ -18,6 +18,11 @@
     <!-- Custom styles for this template -->
     <link href="../assets/custom/signin.css" rel="stylesheet">
 
+    <!-- Bootstrap core and JQuery JavaScript -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -54,9 +59,9 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" id="register">
         <h2 class="form-signin-heading">Please sign up</h2>
-        <input type="text" class="form-control" placeholder="Email address (.edu only)" autofocus>
+        <input type="text" class="form-control" id="email" placeholder="Email address (.edu only)" autofocus>
         <input type="text" class="form-control" placeholder="Username">
         <input type="password" class="form-control" placeholder="Password">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
@@ -64,10 +69,20 @@
 
     </div> <!-- /container -->
 
+    <script>
+      $(document).ready(function() {
+        $("#register").submit( function() {
+          var email = $("#email").val();
+          var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+edu+$/;
+          if (regex.test(email)) {
+            alert("true!");
+          }
+          else {
+            alert("false!");
+          }
+        });
+      });
+    </script>
 
-    <!-- Bootstrap core and JQuery JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   </body>
 </html>
