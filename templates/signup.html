@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../assets/ico/favicon.png">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Register</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
@@ -60,11 +60,11 @@
 
     <div class="container">
 
-      <form class="form-signin" id="register">
+      <form class="form-signin" id="register" action="../api/api.php" method="post">
         <h2 class="form-signin-heading">Please sign up</h2>
-        <input type="text" class="form-control" id="email" placeholder="Email address (.edu only)" autofocus>
-        <input type="text" class="form-control" id="username" placeholder="Username">
-        <input type="password" class="form-control" placeholder="Password">
+        <input name="email" type="text" class="form-control" id="email" placeholder="Email address (.edu only)" autofocus>
+        <input name="username" type="text" class="form-control" id="username" placeholder="Username">
+        <input name="password" type="password" class="form-control" placeholder="Password">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       </form>
 
@@ -72,14 +72,17 @@
 
     <script>
       $(document).ready(function() {
-        $("#register").submit( function() {
+        $("#register").submit( function(e) {
+          // Prevent submit until validation
+          e.preventDefault();
           var email = $("#email").val();
           var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+edu+$/;
           if (regex.test(email)) {
-            alert("true!");
+            // Now submit form
+            $("#register").unbind('submit').submit();
           }
           else {
-            alert("false!");
+            alert("Please use a .edu email address to register!");
           }
         });
       });
