@@ -55,7 +55,7 @@
             </div>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li><button type="button" class="btn btn-danger navbar-btn" data-toggle="modal" href="#newPost">Post</button></li>
+            <li><button type="button" class="btn btn-danger navbar-btn visible-md visible-lg" data-toggle="modal" href="#newPost">Post</button></li>
             <li><a href="#">Logout</a></li>
           </ul>
         </div>
@@ -225,36 +225,39 @@
         </div>
       </div>
     </div>
+
+
+    
     <!-- New Post -->
     <div class="modal fade" id="newPost" tabindex="-1" role="dialog" aria-labelledby="newPostLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title">New Post</h4>
-                    </div>
-                    <br>
-                    <div class="col-xs-9 col-md-6">
-                      <div class="input-group">
-                        <span class="input-group-addon">Title</span>
-                        <input type="text" class="form-control" placeholder="Formula, Image Etc.">
-                      </div>
-                    </div>
-                    <div class="col-xs-3 col-md-6">
-                      <button type="button" class="btn btn-danger">Post</button>
-                    </div>
-                    <div class="col-md-12">
-                      <ul class="pagination">
-                        <li><a href="#"><i class="icon-font"></i> Text</a></li>
-                        <li class="active"><a href="#"><i class="icon-picture"></i> Images</a></li>
-                        <li><a href="#"> <i class="icon-pencil"></i> Doodles</a></li>
-                        <li><a href="#"><i class="icon-beaker"></i> Formulas</a></li>
-                      </ul>
-                    </div>
-                  
-                    </div><!-- /.modal-content -->
-                  </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-              </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">New Post</h4>
+          </div>
+          <br>
+          <div class="col-xs-9 col-md-6">
+            <div class="input-group">
+              <span class="input-group-addon">Title</span>
+              <input type="text" class="form-control" placeholder="Formula, Image Etc.">
+            </div>
+          </div>
+          <div class="col-xs-3 col-md-6">
+            <button type="button" class="btn btn-danger">Post</button>
+          </div>
+          <div class="col-md-12">
+            <ul class="pagination">
+              <li><a href="#"><i class="icon-font"></i> Text</a></li>
+              <li class="active"><a href="#"><i class="icon-picture"></i> Images</a></li>
+              <li><a href="#"> <i class="icon-pencil"></i> Doodles</a></li>
+              <li><a href="#"><i class="icon-beaker"></i> Formulas</a></li>
+            </ul>
+          </div>
+        
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+    </div>
   </body>
 </html>
