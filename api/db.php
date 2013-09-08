@@ -1,4 +1,25 @@
 <?php 
+
+require("~/secret.php");
+
+function hash_str($s) {
+	return hash("sha256", $s . $SECRET);
+}
+
+function make_secure_val($username) {
+	return $username . "|" . hash_str($username);
+}
+
+function check_secure_val($hash) {
+	$val = explode("|", $hash)[0];
+	if ($hash == make_secure_val($val)) {
+		return True;
+	}
+	else {
+		return False;
+	}
+}
+
 class DB{
 	public $con;
 
