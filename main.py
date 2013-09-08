@@ -93,8 +93,14 @@ class SheetHandler(BaseHandler):
 			posts.append(post_obj)
 		
 		params['posts'] = posts
-		self.render('', **params)
+		self.render('sheet.html', **params)
 
+class SubmitHandler(BaseHandler):
+	def get(self):
+		self.redirect('/')
+
+	def post(self):
+		pass
 
 class User(db.Model):
 	email = db.StringProperty(required = True)
@@ -222,5 +228,6 @@ routes = [('/', MainHandler),
 		  ('/login', LoginHandler),
 		  ('/signup', SignupHandler),
 		  ('/logout', LogoutHandler),
-		  ('/sheet/.+', SheetHandler)]
+		  ('/sheet/.+', SheetHandler),
+		  ('/submit', SubmitHandler)]
 app = webapp2.WSGIApplication(routes, debug=True)
