@@ -12,7 +12,13 @@
             <div class="panel-body">
               <div class="image-post">
                 <p class="notes">
+                  {{% if post.is_image %}}
+                    <img src=
+                  {{% endif %}}
                   {{post.content}}
+                  {{% if post.is_image %}}
+                    />
+                  {{% endif %}}
                 </p>
               </div>
             </div>

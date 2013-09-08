@@ -58,6 +58,7 @@ class Post(db.Model):
 	sheet = db.StringProperty(required = True)
 	title = db.StringProperty(required = True)
 	content = db.TextProperty(required = True)
+	is_image = db.BooleanProperty(required = True)
 	username = db.StringProperty(required = True)
 	userpicture = db.StringProperty(required = True)
 	upvotes = db.IntegerProperty(required = True)
@@ -86,6 +87,7 @@ class SheetHandler(BaseHandler):
 			post_obj['id'] = post.key().id()
 			post_obj['title'] = post.title
 			post_obj['content'] = post.content
+			post_obj['is_image'] = post.is_image
 			post_obj['username'] = post.username
 			post_obj['userpicture'] = post.userpicture
 			post_obj['upvotes'] = post.upvotes
@@ -100,7 +102,7 @@ class SubmitHandler(BaseHandler):
 		self.redirect('/')
 
 	def post(self):
-		pass
+		
 
 class User(db.Model):
 	email = db.StringProperty(required = True)
