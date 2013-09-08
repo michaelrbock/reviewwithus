@@ -12,16 +12,15 @@
           <div class="panel panel-custom">
             <div class="panel-body">
               <div class="image-post">
-                <p class="notes">
-                  {% if post.is_image %}
-                    <img src=
-                  {% endif %}
-                  {{post.content}}
-                  {% if post.is_image %}
-                    />
-                  {% endif %}
-                </p>
+                {% if post.is_image %}
+                  <img src="{{post.content}}">
+                {% endif %}
               </div>
+              <p class="notes">
+                {% if not post.is_image %}
+                  {{post.content}}
+                {% endif %}
+              </p>
             </div>
             <div class="panel-footer">
               <div class="row">
