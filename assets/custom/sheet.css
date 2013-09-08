@@ -6,8 +6,12 @@
 }
 .arrows-down{
 	color:#000;
-
 }
+
+.arrows:visited{
+  
+}
+
 .arrows-up a:hover {
 	color:#468847;
   }
