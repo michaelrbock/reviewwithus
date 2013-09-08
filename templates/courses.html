@@ -1,77 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="/assets/ico/favicon.png">
+{% extends "base.html" %}
+  <!-- Custom styles for this template -->
+  <link href="/assets/custom/courses.css" rel="stylesheet">
 
-    <title>Title</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
-    <!-- Overall custom styles -->
-    <link href="/assets/custom/custom.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/assets/custom/courses.css" rel="stylesheet">
-
-    <!-- Bootstrap coree, JQuery/JQueryUI, sketch JavaScript includes -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/sketch.min.js"></script>
-
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="/assets/js/html5shiv.js"></script>
-      <script src="/assets/js/respond.min.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-    <div id="navbar-include">
-    </div>
-    <div id="post-include">
-    </div>
-    <script type="text/javascript">
-      $("#navbar-include").load("./navbar-loggedin.html")
-    </script>
-    <script type="text/javascript">
-      $("#post-include").load("./modalpost.html")
-    </script>
-    <br>
-    <br>
-    <br>
-
-
-    {{% Block course  %}}
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-sm-12">
-            <div class="panel panel-custom">
-              <div class="panel-body">
-                <div class="image-post">
-                  <div class="col-xs-10 col-md-10">
-                    <h4>
-                    {{Course Name}} <span class="glyphicon glyphicon-chevron-right"></span></h4>
-                  </div>
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+          <div class="panel panel-custom">
+            <div class="panel-body">
+              <div class="image-post">
+                <div class="col-xs-10 col-md-10">
+                  <h4>
+                    {{coursename}} <span class="glyphicon glyphicon-chevron-right"></span>
+                  </h4>
                 </div>
               </div>
             </div>
-        </div>
-        {{% endblock %}}
-
-
-
-
-       
-
-  </body>
-</html>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
