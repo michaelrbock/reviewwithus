@@ -4,6 +4,7 @@
 
 {% block content %}
   <div class="container">
+    {% for course in courses %}
     <div class="row">
       <div class="col-md-8 col-sm-12">
           <div class="panel panel-custom">
@@ -11,7 +12,7 @@
               <div class="image-post">
                 <div class="col-xs-10 col-md-10">
                   <h4>
-                    {{coursename}} <span class="glyphicon glyphicon-chevron-right"></span>
+                    <a href="/sheet/{{course}}">{{course}} <span class="glyphicon glyphicon-chevron-right"></span></a>
                   </h4>
                 </div>
               </div>
@@ -19,5 +20,6 @@
           </div>
       </div>
     </div>
+    {% endfor %}
   </div>
 {% endblock %}
