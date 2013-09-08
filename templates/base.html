@@ -71,15 +71,123 @@
             <div class="form-group ui-widget">
               <input id="courses" type="text" class="form-control" placeholder="Search">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default">Search</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <li><button type="button" class="btn btn-danger navbar-btn">Submit</button></li>
+            <li><button type="button" class="btn btn-danger navbar-btn" data-toggle="modal" href="#newPost">Submit</button></li>
             <li class="inactive"><a href="/logout">Logout</a></li>
           </ul>
         </div>
       </div>
     </nav>
+    <div class="modal fade" id="newPost" tabindex="-1" role="dialog" aria-labelledby="newPost" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">New Post</h4>
+            </div>
+            <br>
+            <row>
+              <div class="col-xs-9 col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Title</span>
+                  <input type="text" class="form-control" placeholder="Formula, Image Etc.">
+                </div>
+              </div>
+              <div class="col-xs-3 col-md-6">
+              </div> 
+          </row>
+          <br>
+          <row>
+            <div class="col-md-12">
+              <ul class="pagination">
+                <li class="active" ><a href="#Text" data-toggle="tab"><i class="icon-font"></i> Text</a></li>
+                <li><a href="#Images" data-toggle="tab"><i class="icon-picture"></i> Images</a></li>
+                <li><a href="#doodles-tab" class="visible-md visible-lg" id="doodles" data-toggle="tab"> <i class="icon-pencil"></i> Doodles</a></li>
+                <script type="text/javascript">
+                  $('#doodles').bind('click', function () {
+                    $(function() {
+                      $('#simple_sketch').sketch();
+                    });
+                  });
+                </script>
+                <li><a href="#Formulas" class="visible-md visible-lg" data-toggle="tab"><i class="icon-beaker"></i> Formulas</a></li>
+              </ul>
+              <br>
+              <div class="tab-content">
+                <div class="tab-pane active" id="Text">
+                  <textarea class="form-control" rows="5" style="max-width:100%;"></textarea>
+                  <br>    `
+                  <button type="button" class="btn btn-danger">Post</button>
+                </div>
+                <div class="tab-pane" id="Images">
+                  <input type="dropbox-chooser" name="newFiles" style="visibility: hidden;" data-extensions=".jpg .png"/>
+                  <div class="sketchpad">
+                    Image here
+                   </div>
+                   <br>   
+                  <input type="dropbox-chooser" name="selected-file" id="db-chooser"/>
+                  <script type="text/javascript">
+                  document.getElementById("db-chooser").addEventListener("DbxChooserSuccess",
+                      function(e) {
+                          alert("Here's the chosen file: " + e.files[0].link)
+                      }, false);
+                  </script>
+                </div>
+                <div class="tab-pane" id="doodles-tab">                
+                  <div class="sketchpad">
+                    <div class="tools">
+                      <canvas id="simple_sketch" width="700" height="500"></canvas>
+                    </div>
+                  </div>
+                  <br>
+                  <a href="#simple_sketch" data-download="png" style="float: left; width: 100px;"><button type="button" class="btn btn-danger">Post</button></a>
+                  <br>
+                  <br>
+                </div>
+                <div class="tab-pane" id="Formulas">
+                  <textarea class="form-control" rows="2" style="max-width:100%;"></textarea>
+                  <br>    
+                  <button id="wolfram" type="button" class="btn btn-danger">Preview</button>
+                  <br>   
+                  <br>    
+                  <div class="sketchpad">
+                    go
+                  </div>
+                  <br>   
+                  <button type="button" class="btn btn-danger">Post</button>
+                  <script type="text/javascript">
+                  $('#wolfram').bind('click', function () {
+                    $.ajax({
+                      url: "api.wolframalpha.com/v2/query",
+                      data: {input:'pi', appid:'5H2U52-664GL8PU39'},
+           
+                      success:function(data){
+                        // successful request; do something with the data
+                        $('#ajax-panel').empty();
+                        $(data).find('item').each(function(i){
+                          $('#ajax-panel').append('<h4>' + $(this).find('title').text() + '</h4><p>' + $(this).find('link').text() + '</p>');
+                        });
+                      },
+                      error:function(){
+                        // failed request; give feedback to user
+                        $('#ajax-panel').html('<p class="error"><strong>Oops!</strong> Try that again in a few moments.</p>');
+                      }
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+          </row>
+          <br>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+
     {% endif %}
 
     {% if not user_loggedin %}
