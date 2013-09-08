@@ -16,7 +16,9 @@ if(isset($_POST['email']) and isset($_POST['username']) and isset($_POST['passwo
 	$db->insert_user($_POST['email'],$_POST['password'],$_POST['username']);
 	$db->run_select();
 	$db->close();
-	header( 'Location: http://ite.com' ) ;
+	setcookie("U", make_secure_val($_POST['username']), time()+60*60*24*30, '/');
+	header( 'Location: ./courses.php' );
+	die();
 }
 else 
 {
