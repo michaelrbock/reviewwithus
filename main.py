@@ -54,6 +54,18 @@ class MainHandler(BaseHandler):
 		params['user_loggedin'] = user_check
 		self.render('index.html', **params)
 
+class Sheet(db.Model):
+	title = db.StringProperty(required = True)
+	content = db.TextProperty(required = True)
+	username = db.StringProperty(required = True)
+	userpicture = db.StringProperty(required = True)
+	upvotes = db.IntegerProperty(required = True)
+	downvotes = db.IntegerProperty(required = True)
+
+class SheetHandler(BaseHandler):
+	def get(self):
+		pass
+
 class User(db.Model):
 	email = db.StringProperty(required = True)
 	username = db.StringProperty(required = True)
@@ -173,5 +185,6 @@ def escape_html(s):
 routes = [('/', MainHandler),
 		  ('/login', LoginHandler),
 		  ('/signup', SignupHandler),
-		  ('/logout', LogoutHandler)]
+		  ('/logout', LogoutHandler),
+		  ('/sheet/.+', SheetHandler)]
 app = webapp2.WSGIApplication(routes, debug=True)
