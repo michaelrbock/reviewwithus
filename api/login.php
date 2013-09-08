@@ -1,7 +1,7 @@
 <?php 
 require("db.php");
 $db = new DB();
-//$db->run_select();
+$db->run_select();
 readfile("../templates/login.html");
 
 if(isset($_POST['email']) and isset($_POST['password']))
@@ -14,7 +14,8 @@ if(isset($_POST['email']) and isset($_POST['password']))
 	if (mysql_fetch_array($result) !== false)
 	{
 		echo "<script>alert('log in baby')</script>";
-		//header('Location: http://google.com');
+		setcookie("email",$email,time() + 10);
+		header('Location: courses.php');
 	}
 	$db->close();
 }
