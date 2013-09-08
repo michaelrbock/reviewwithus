@@ -138,13 +138,20 @@ class SignupHandler(BaseHandler):
 			#get users from db
 			user_query = db.GqlQuery("SELECT * FROM User")
 			users = []
+			emails = []
 			for user in user_query:
 				user._id = user.key().id()
 				users.append(user.username)
+				emails.append(user.email)
 
 			if user_username in users:
 				params = {}
 				params['username_error'] = "That user alreay exists"
+				self.render('signup.html', **params)
+				return
+			elif user_email in emails:
+				params = {}
+				params['email_error'] = "That user alreay exists"
 				self.render('signup.html', **params)
 				return
 			else:
@@ -155,7 +162,6 @@ class SignupHandler(BaseHandler):
 				str_new_cookie_val = str(new_cookie_val)
 				self.response.headers.add_header('Set-Cookie', 'user='+str_new_cookie_val+'; Path=/')
 				self.redirect(next_url)
-
 		else:
 			params = {'username': user_username,
 					  'email': user_email}

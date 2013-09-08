@@ -37,11 +37,72 @@
 
   <body>
     {% if user_loggedin %}
-    NAVBAR LOGGEDIN
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">CheetSheet</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Choose School <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a class="school" href="#">UPenn</a></li>
+                <li><a class="school" href="#">USC</a></li>
+                <li><a class="school" href="#">WashU LOL</a></li>
+              </ul>
+            </li>
+            <script type="text/javascript">
+              $('.school').click( function() {
+                $('.dropdown-toggle').text($(this).text() + " ");
+                $('.dropdown-toggle').append('<b class="caret"></b>');
+                setSchool($(this).text());
+                setUp();
+              });
+            </script>
+          </ul>
+          <form class="navbar-form navbar-left" role="search" method="post" action="FILL_IN"> 
+            <div class="form-group ui-widget">
+              <input id="courses" type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><button type="button" class="btn btn-danger navbar-btn">Post</button></li>
+            <li class="inactive"><a href="#">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     {% endif %}
 
     {% if not user_loggedin %}
-    NAVBAR LOGGEDOUT
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">CheetSheet</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <button onclick="location.href='/login'" type="button" class="btn btn-danger navbar-btn">Login</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     {% endif %}
 
     <div id="content">
