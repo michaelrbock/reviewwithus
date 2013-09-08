@@ -19,7 +19,7 @@ from google.appengine.ext import db
 jinja_environment = jinja2.Environment(autoescape=True,
 	loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')))
 
-SECRET = 'hey'
+SECRET = open('secret.pw').read()
 
 def hash_str(s):
 	return hmac.new(SECRET, s).hexdigest()
