@@ -26,7 +26,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/sketch.min.js"></script>
-
+<script type="text/javascript" src="https://www.dropbox.com/static/api/1/dropins.js" id="dropboxjs" data-app-key="02lsv12iu58jrsv"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -119,21 +119,23 @@
                     <button type="submit" class="btn btn-danger">Submit</button>
                   </form>
                 </div>
-                <div class="tab-pane" id="Images">
-                  <input type="dropbox-chooser" name="newFiles" style="visibility: hidden;" data-extensions=".jpg .png"/>
-                  <div class="sketchpad">
-                    Image here
-                   </div>
-                   <br>   
+                <div class="tab-pane" id="Images"> 
+                  <div class="input-group">
+                      <span class="input-group-addon">Title</span>
+                      <input name="title" type="text" class="form-control" placeholder="Formula, Image Etc.">
+                    </div>
+                    <br>
                   <input type="dropbox-chooser" name="selected-file" id="db-chooser"/>
-                  <script type="text/javascript">
-                  document.getElementById("db-chooser").addEventListener("DbxChooserSuccess",
-                      function(e) {
-                          alert("Here's the chosen file: " + e.files[0].link)
-                      }, false);
-                  </script>
+                  <br>
+                  <br>
+                  <button type="submit" class="btn btn-danger">Submit</button> 
                 </div>
-                <div class="tab-pane" id="doodles-tab">                
+                <div class="tab-pane" id="doodles-tab">
+                 <div class="input-group">
+                      <span class="input-group-addon">Title</span>
+                      <input name="title" type="text" class="form-control" placeholder="Formula, Image Etc.">
+                    </div>    
+                    <br>            
                   <div class="sketchpad">
                     <div class="tools">
                       <canvas id="simple_sketch" width="700" height="500"></canvas>
@@ -145,6 +147,11 @@
                   <br>
                 </div>
                 <div class="tab-pane" id="Formulas">
+                   <div class="input-group">
+                      <span class="input-group-addon">Title</span>
+                      <input name="title" type="text" class="form-control" placeholder="Formula, Image Etc.">
+                    </div>
+                    <br>
                   <textarea class="form-control" rows="2" style="max-width:100%;"></textarea>
                   <br>    
                   <button id="wolfram" type="button" class="btn btn-danger">Preview</button>
