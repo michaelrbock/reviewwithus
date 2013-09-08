@@ -6,8 +6,13 @@
 
   <div class="container">
     <br><br><br>
-    <div class="row"><!-- Place 3 posts here -->
-      {% for post in posts %}
+    {% for post in posts %}
+      {% if loop.index0 is sameas(0) %}
+      <div class="row"><!-- Place 3 posts here -->
+      {% endif %}
+      {% if loop.index0 is sameas(3) %}
+      <div class="row"><!-- Place 3 posts here -->
+      {% endif %}
         <div class="col-md-4 col-sm-6">
           <div class="panel panel-custom">
             <div class="panel-body">
@@ -89,7 +94,12 @@
             </div><!-- /.modal-dialog -->
           </div><!-- /.modal -->
         </div>
-      {% endfor %}
-    </div>
+      {% if loop.index0 is sameas(2) %}
+      </div><!--.row-->
+      {% endif %}
+      {% if loop.index0 is sameas(5) %}
+      </div><!--.row-->
+      {% endif %}
+    {% endfor %}
   </div>
 {% endblock %}
