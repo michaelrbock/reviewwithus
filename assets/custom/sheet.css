@@ -8,16 +8,22 @@
 	color:#000;
 }
 
-.arrows:visited{
-  
-}
 
-.arrows-up a:hover {
+
+.arrows-up :hover {
 	color:#468847;
   }
 
- .arrows-down a:hover {
+ .arrows-down :hover {
 	color: #b94a48;
+  }
+
+  .arrows-up :visited{
+  color:#468847;
+}
+
+ .arrows-down :visited {
+  color: #b94a48;
   }
 .messages {
 	text-align:center;
