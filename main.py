@@ -102,7 +102,18 @@ class SubmitHandler(BaseHandler):
 		self.redirect('/')
 
 	def post(self):
-		
+		title = self.request.get('title')
+		content = self.request.get('content')
+		is_image = self.request.get('is-image')
+		if is_image:
+			is_image = True
+		else:
+			is_image = False
+		username = self.request.cookies.get('user').split('|')[0]
+		userpicture = 'http://sphotos-b.xx.fbcdn.net/hphotos-ash4/386693_10151203483502285_324245315_n.jpg'
+		p = Post(sheet="cs101", title=title, content=content, is_image=is_image, username=username, userpicture=userpicture, upvotes=0, downvotes=0)
+		p.put()
+		self.redirect('/sheet/cs101')
 
 class User(db.Model):
 	email = db.StringProperty(required = True)

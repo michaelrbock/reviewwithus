@@ -46,7 +46,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">CheetSheet</a>
+          <a class="navbar-brand" href="/">CheetSheet</a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
@@ -87,18 +87,6 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title">New Entry</h4>
           </div>
-          <br>
-          <row>
-            <div class="col-xs-9 col-md-6">
-              <div class="input-group">
-                <span class="input-group-addon">Title</span>
-                <input type="text" class="form-control" placeholder="Formula, Image Etc.">
-              </div>
-            </div>
-            <div class="col-xs-3 col-md-6">
-            </div> 
-          </row>
-          <br>
           <row>
             <div class="col-md-12">
               <ul class="pagination">
@@ -117,9 +105,19 @@
               <br>
               <div class="tab-content">
                 <div class="tab-pane active" id="Text">
-                  <textarea class="form-control" rows="5" style="max-width:100%;"></textarea>
-                  <br>
-                  <button type="button" class="btn btn-danger">Submit</button>
+                  <form method="post" action="/submit">
+                    <input type="hidden" name="next_url" value="{{next_url}}">
+                    <div class="input-group">
+                      <span class="input-group-addon">Title</span>
+                      <input name="title" type="text" class="form-control" placeholder="Formula, Image Etc.">
+                    </div>
+                    <br>
+                    <textarea name="content" class="form-control" rows="5" style="max-width:100%;"></textarea>
+                    <br>
+                    Image: <input name="is-image" type="checkbox" value="True">
+                    <br><br>
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                  </form>
                 </div>
                 <div class="tab-pane" id="Images">
                   <input type="dropbox-chooser" name="newFiles" style="visibility: hidden;" data-extensions=".jpg .png"/>
