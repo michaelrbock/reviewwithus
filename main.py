@@ -54,6 +54,34 @@ class MainHandler(BaseHandler):
 		params['user_loggedin'] = user_check
 		self.render('index.html', **params)
 
+class CoursesHandler(BaseHandler):
+	def get(self):
+		cookie_user = self.request.cookies.get('user')
+		if cookie_user:
+			user_check = check_secure_val(cookie_user)
+		else:
+			user_check = False
+		if not user_check:
+			self.redirect('/')
+			return
+		params = {}
+		params['user_loggedin'] = user_check
+
+		q = User.all()
+		q.filter('username =',cookie_user.split('|')[0])
+		for user in q:
+			params['username'] = cookie_user.split('|')[0]
+			course_str = user.courses
+			courses = course_str.split('|')
+		params['courses'] = courses
+
+
+
+
+		self.render('courses.html', **params)
+
+
+
 class Post(db.Model):
 	sheet = db.StringProperty(required = True)
 	title = db.StringProperty(required = True)
@@ -121,6 +149,7 @@ class User(db.Model):
 	password = db.StringProperty(required = True)
 	created = db.DateTimeProperty(auto_now_add = True)
 	last_modified = db.DateTimeProperty(auto_now = True)
+	courses = db.StringProperty(required = True)
 
 class LoginHandler(BaseHandler):
 	def get(self):
@@ -205,7 +234,7 @@ class SignupHandler(BaseHandler):
 				return
 			else:
 				#else add user
-				u = User(username=user_username, password=hash_str(user_password), email=user_email)
+				u = User(username=user_username, password=hash_str(user_password), email=user_email, courses="cs101|cs102")
 				u.put()
 				new_cookie_val = make_secure_val(user_username)
 				str_new_cookie_val = str(new_cookie_val)
