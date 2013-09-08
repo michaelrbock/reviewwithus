@@ -36,7 +36,7 @@
   </head>
 
   <body>
-    <  <div id="navbar-include">
+    <div id="navbar-include">
     </div>
     <div id="post-include">
     </div>
@@ -51,7 +51,23 @@
     <br>
 
 
-	{{content}}
+    {{% Block course  %}}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <div class="panel panel-custom">
+              <div class="panel-body">
+                <div class="image-post">
+                  <div class="col-xs-10 col-md-10">
+                    <h4>
+                    {{Course Name}} <span class="glyphicon glyphicon-chevron-right"></span></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        {{% endblock %}}
+
 
 
 
