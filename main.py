@@ -12,6 +12,7 @@ import hashlib
 import hmac
 import logging
 import json
+from random import randint
 from datetime import datetime, time
 from google.appengine.api import memcache
 from google.appengine.ext import db
@@ -110,7 +111,16 @@ class SubmitHandler(BaseHandler):
 		else:
 			is_image = False
 		username = self.request.cookies.get('user').split('|')[0]
-		userpicture = 'http://sphotos-b.xx.fbcdn.net/hphotos-ash4/386693_10151203483502285_324245315_n.jpg'
+		# userpic roulette :)
+		i = randint(0,3)
+		if i == 0:
+			userpicture = 'http://sphotos-b.xx.fbcdn.net/hphotos-ash4/386693_10151203483502285_324245315_n.jpg'
+		elif i == 1:
+			userpicture = 'http://sphotos-a.xx.fbcdn.net/hphotos-prn1/40424_422974995237_8211128_n.jpg'
+		elif i == 2:
+			userpicture = 'http://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn2/c44.44.551.551/s320x320/1186887_10151914392242652_362816059_n.jpg'
+		else:
+			userpicture = 'http://0.gravatar.com/avatar/10e24ed6ef2d6e98ab60ddc00057607c?d=https%3A%2F%2Fidenticons.github.com%2Fe84e92e5eb0ea74febba4f6b2c1cb7b5.png&s=420'
 		p = Post(sheet="cs101", title=title, content=content, is_image=is_image, username=username, userpicture=userpicture, upvotes=0, downvotes=0)
 		p.put()
 		self.redirect('/sheet/cs101')
