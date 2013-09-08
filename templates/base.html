@@ -36,11 +36,11 @@
   </head>
 
   <body>
-    {% if user %}
+    {% if user_loggedin %}
     NAVBAR LOGGEDIN
     {% endif %}
 
-    {% if not user %}
+    {% if not user_loggedin %}
     NAVBAR LOGGEDOUT
     {% endif %}
 

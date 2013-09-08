@@ -1,62 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="/assets/ico/favicon.png">
+{% extends "base.html" %}
 
-    <title>Signin</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
-    <!-- Overall custom styles -->
-    <link href="/assets/custom/custom.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/assets/custom/signin.css" rel="stylesheet">
-
-    <!-- Bootstrap core and JQuery/JQueryUI JavaScript includes -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-  </head>
-
-  <body>
-
-    <div id="navbar-include">
-    </div>
-    <div id="navbar-include"></div>
-    <script type="text/javascript">
-      $("#navbar-include").load("./navbar-loggedout.html");
-    </script>
-    <br>
-
-<br>
+{% block content %}
+  <!-- Custom styles for this template -->
+  <link href="/assets/custom/signin.css" rel="stylesheet">
+  
   <br>
-<br>
   <br>
-    <div class="container">
-      
-         <div class="panel panel-custom">
-              <div class="panel-body">
-      <form class="form-signin" method="post">
-        <input type="hidden" name="next_url" value="{{next_url}}">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input name="email" type="text" class="form-control" placeholder="Email address" autofocus>
-        <input name="password" type="password" class="form-control" placeholder="Password">
-        <div class="error">{{error}}</div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
- </div> 
-  </div> 
-    </div> <!-- /container -->
-
-
-  </body>
-</html>
+  <br>
+  <br>
+  <br>
+  <div class="container">
+    <div class="panel panel-custom">
+      <div class="panel-body">
+        <form class="form-signin" method="post">
+          <input type="hidden" name="next_url" value="{{next_url}}">
+          <h2 class="form-signin-heading">Please sign in</h2>
+          <input name="username" type="text" class="form-control" placeholder="Username" autofocus>
+          <input name="password" type="password" class="form-control" placeholder="Password">
+          <div class="error">{{error}}</div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+      </div> 
+    </div> 
+  </div> <!-- /container -->
+{% endblock %}

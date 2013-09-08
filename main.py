@@ -17,7 +17,9 @@ from google.appengine.api import memcache
 from google.appengine.ext import db
 
 jinja_environment = jinja2.Environment(autoescape=True,
-    loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')))
+	loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')))
+
+SECRET = 'hey'
 
 def hash_str(s):
 	return hmac.new(SECRET, s).hexdigest()
@@ -42,10 +44,18 @@ class BaseHandler(webapp2.RequestHandler):
 		self.response.out.write(*a, **kw)
 
 class MainHandler(BaseHandler):
-    def get(self):
-        self.render('index.html')
+	def get(self):
+		cookie_user = self.request.cookies.get('user')
+		if cookie_user:
+			user_check = check_secure_val(cookie_user)
+		else:
+			user_check = False
+		params = {}
+		params['user_loggedin'] = user_check
+		self.render('index.html', **params)
 
 class User(db.Model):
+	email = db.StringProperty(required = True)
 	username = db.StringProperty(required = True)
 	password = db.StringProperty(required = True)
 	created = db.DateTimeProperty(auto_now_add = True)
@@ -99,7 +109,6 @@ class SignupHandler(BaseHandler):
 	def post(self):
 		user_username = self.request.get('username')
 		user_password = self.request.get('password')
-		user_verify   = self.request.get('verify')
 		user_email    = self.request.get('email')
 
 		#redirect stuff
@@ -109,14 +118,10 @@ class SignupHandler(BaseHandler):
 
 		is_username_valid = valid_username(user_username)
 		is_password_valid = valid_password(user_password)
-		if (user_password==user_verify):
-			is_verify_valid = True
-		else:
-			is_verify_valid = False
 		is_email_valid    = valid_email(user_email)
 
 		if (is_username_valid and is_password_valid
-			and is_verify_valid and is_email_valid):
+			and is_email_valid):
 			#check if user already in database
 			#get users from db
 			user_query = db.GqlQuery("SELECT * FROM User")
@@ -132,7 +137,7 @@ class SignupHandler(BaseHandler):
 				return
 			else:
 				#else add user
-				u = User(username=user_username, password=hash_str(user_password))
+				u = User(username=user_username, password=hash_str(user_password), email=user_email)
 				u.put()
 				new_cookie_val = make_secure_val(user_username)
 				str_new_cookie_val = str(new_cookie_val)
@@ -141,13 +146,11 @@ class SignupHandler(BaseHandler):
 
 		else:
 			params = {'username': user_username,
-				  	  'email': user_email}
+					  'email': user_email}
 			if not is_username_valid:
 				params['username_error'] = "That's not a valid username."
 			if not is_password_valid:
 				params['password_error'] = "That wasn't a valid password."
-			if not is_verify_valid:
-				params['verify_error'] = "Your passwords didn't match."
 			if not is_email_valid:
 				params['email_error'] = "That's not a valid email."
 			self.render('signup.html', **params)
@@ -160,7 +163,7 @@ PASSWORD_RE = re.compile(r"^.{3,20}$")
 def valid_password(password):
 	return password and PASSWORD_RE.match(password)
 
-EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
+EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.edu+$")
 def valid_email(email):
 	return not email or EMAIL_RE.match(email)
 
