@@ -1,39 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="/assets/ico/favicon.png">
+{% extends "base.html" %}
 
-    <title>Title</title>
+{% block content %}
+  <!-- Custom styles for this template -->
+  <link href="/assets/custom/sheet.css" rel="stylesheet">
 
-    <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
-    <!-- Overall custome styles -->
-    <link href="/assets/custom/custom.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/assets/custom/sheet.css" rel="stylesheet">
-
-    <!-- Bootstrap core and JQuery JavaScript -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-    <script src="/assets/js/sketch.min.js"></script>
-
-
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <!-- Place 3 posts here -->
-      </div>
+  <div class="container">
+    <div class="row"><!-- Place 3 posts here -->
+      {{% for post in posts %}}
+        <div class="col-md-4 col-sm-6">
+          <div class="panel panel-custom">
+            <div class="panel-body">
+              <div class="image-post">
+                <p class="notes">
+                  {{post.content}}
+                </p>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <div class="row">
+                <div class="col-xs-10 col-md-10">
+                  <h4>{{post.title}}</h4>
+                </div>
+                <div class="col-xs-2 col-md-2">
+                  <div class="arrows">
+                    <h4><a class="arrows-up" href="#[****ARROWUP]"><span class="glyphicon glyphicon-chevron-up"></span></a></h4>
+                    <h4><a class="arrows-down" href="#[****ARROWDOWN]"><span class="glyphicon glyphicon-chevron-down"></span></a></h4>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-10 col-md-10">
+                  <h6>{{post.username}}</h6>
+                </div>
+                <div class="col-xs-2 col-md-2">
+                  <div class="messages">
+                    <a data-toggle="modal" href="#{{post.id}}"><h4><span class="glyphicon glyphicon-comment"></span> </h4></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="{{post.id}}" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">
+                <p class="notes">
+                    {{post.content}}
+                </p>  
+                <div class="row">
+                  <div class="col-xs-10 col-md-10">
+                    <h4>{{post.title}}</h4>
+                    <img class="profile" src="{{post.userpicture}}"><h6>{{post.username}}</h6>
+                  </div>
+                  <div class="col-xs-2 col-md-2">
+                    <div class="arrows">
+                      <h4 class="text-danger"><span class="glyphicon glyphicon-chevron-up"></span> </h4 >
+                      <h4><span class="glyphicon glyphicon-chevron-down"></span> </h4>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-comment">
+                  <div class="input-group">
+                    <input type="text" class="form-control">
+                    <span class="input-group-btn">
+                      <button class="btn btn-danger" type="button">Comment</button>
+                    </span>
+                  </div><!-- /input-group -->
+                </div>                
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        </div>
+      {% endfor %}
     </div>
-  </body>
-</html>
+  </div>
+{% endblock %}
+
