@@ -54,7 +54,8 @@ class MainHandler(BaseHandler):
 		params['user_loggedin'] = user_check
 		self.render('index.html', **params)
 
-class Sheet(db.Model):
+class Post(db.Model):
+	sheet = db.StringProperty(required = True)
 	title = db.StringProperty(required = True)
 	content = db.TextProperty(required = True)
 	username = db.StringProperty(required = True)
@@ -64,7 +65,36 @@ class Sheet(db.Model):
 
 class SheetHandler(BaseHandler):
 	def get(self):
-		pass
+		params = {}
+		cookie_user = self.request.cookies.get('user')
+		if cookie_user:
+			user_check = check_secure_val(cookie_user)
+		else:
+			user_check = False
+		if not user_check:
+			self.redirect('/')
+			return
+		params['user_loggedin'] = user_check
+
+		sheet_name = self.request.path.split('/sheet/')[1]
+		posts_query = Post.all()
+		posts_query.filter('sheet =', sheet_name)
+		posts_query.order('-upvotes')
+		posts = [] # list of post_obj's
+		for post in posts_query:
+			post_obj = {}
+			post_obj['id'] = post.key().id()
+			post_obj['title'] = post.title
+			post_obj['content'] = post.content
+			post_obj['username'] = post.username
+			post_obj['userpicture'] = post.userpicture
+			post_obj['upvotes'] = post.upvotes
+			post_obj['downvotes'] = post.downvotes
+			posts.append(post_obj)
+		
+		params['posts'] = posts
+		self.render('', **params)
+
 
 class User(db.Model):
 	email = db.StringProperty(required = True)
